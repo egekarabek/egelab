@@ -121,7 +121,8 @@ class StorageManager {
       { id: 'memory_master', title: 'Süper Bellek', desc: 'Uzay Hafıza Lab\'ını başarıyla tamamla', icon: '🧠' },
       { id: 'quiz_genius', title: 'Bilim Dehası', desc: 'Bilim Sınavında 5 soruyu doğru yanıtla', icon: '🏆' },
       { id: 'solar_explorer', title: 'Güneş Sistemi Kaşifi', desc: 'Güneş Sistemi 3D Laboratuvarında gezegenleri keşfet', icon: '🌌' },
-      { id: 'cosmic_master', title: 'Kozmik Bilgin', desc: 'Güneş Sistemi Bilgi Testini başarıyla tamamla', icon: '🪐' }
+      { id: 'cosmic_master', title: 'Kozmik Bilgin', desc: 'Güneş Sistemi Bilgi Testini başarıyla tamamla', icon: '🪐' },
+      { id: 'word_wizard', title: 'Kelime Büyücüsü', desc: 'İngilizce Kelime Lab\'ında 15 kartlık görevi başarıyla tamamla', icon: '🇬🇧' }
     ];
 
     return badgeDefinitions.map(b => ({

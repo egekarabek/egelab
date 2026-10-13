@@ -53,6 +53,12 @@
    - Yan yana Gezegen Karşılaştırma aracı ve Astronomi Bilgi Testi.
    - Hem tam ekran bağımsız kokpit (`solar-system.html`) hem de Ege Lab içi modül (`js/games/solar-system.js`).
 
+7. **🇬🇧 İngilizce Kelime Laboratuvarı (Word Master - 15 Kartlı Görev):**
+   - Ortaokul 5-8. sınıf müfredatı ve bilim/macera/teknoloji temalı 80+ kelimelik havuzdan seçilen 15 kartlık seri.
+   - Web Speech API ile anadilde sesli İngilizce telaffuz (🔊 Speech Synthesis) ve fonetik okunuş (IPA).
+   - Bağlam içinde örnek İngilizce cümle ipuçları ve %50 eleme jokeri.
+   - Kombo çarpanı, seviye XP'si ve oyun sonu 15 kelimelik özet inceleme kartları.
+
 ---
 
 ## 💻 Nasıl Çalıştırılır?
@@ -79,7 +85,7 @@ d:\Projeler\egelab\
 ├── index.html                 # Ana sayfa ve oyun alanı
 ├── solar-system.html          # Tam ekran 3D Güneş Sistemi Simülatörü
 ├── manifest.json              # PWA manifest dosyası & kısayolları
-├── sw.js                      # Çevrimdışı önbellekleme (Service Worker v1.3)
+├── sw.js                      # Çevrimdışı önbellekleme (Service Worker v1.4)
 ├── start-server.ps1           # Tek tıkla yerel sunucu başlatıcı
 ├── README.md                  # Proje dokümantasyonu
 ├── css/
@@ -94,7 +100,8 @@ d:\Projeler\egelab\
 │       ├── gravity-cannon.js  # Fizik Yerçekimi Topu
 │       ├── science-memory.js  # Fen Hafıza Kartları
 │       ├── science-quiz.js    # Element & Bilim Trivia
-│       └── solar-system.js    # Güneş Sistemi 3D Laboratuvarı
+│       ├── solar-system.js    # Güneş Sistemi 3D Laboratuvarı
+│       └── word-master.js     # İngilizce Kelime Laboratuvarı (15 Kart)
 └── icons/
     ├── icon-192.png           # 192x192 PWA ikonu
     ├── icon-512.png           # 512x512 PWA ikonu

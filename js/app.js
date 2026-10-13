@@ -200,9 +200,20 @@ class EgeLabApp {
         desc: 'Güneş ve 8 gezegeni 3D keşfet, yörüngeleri canlandır ve gezegenlerde kilonu test et!',
         icon: '🌌',
         color: 'from-cyan-500 to-blue-600',
-        badge: 'Yeni Deney',
+        badge: 'Uzay Lab',
         scoreLabel: 'Keşif Durumu',
         scoreVal: '3D İnteraktif'
+      },
+      {
+        id: 'wordMaster',
+        title: 'İngilizce Kelime Lab',
+        category: 'İngilizce & Dil',
+        desc: '15 kartlık seride İngilizce kelime telaffuzlarını dinle ve doğru anlamları eşleştir!',
+        icon: '🇬🇧',
+        color: 'from-emerald-500 to-teal-600',
+        badge: '15 Kart',
+        scoreLabel: 'En Yüksek Skor',
+        scoreVal: storage.getHighScore('wordMaster')
       }
     ];
 
@@ -252,6 +263,9 @@ class EgeLabApp {
         break;
       case 'solarSystem':
         this.activeGame = new SolarSystemGame(container);
+        break;
+      case 'wordMaster':
+        this.activeGame = new EnglishWordMasterGame(container);
         break;
       default:
         this.showHome();
