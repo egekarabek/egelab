@@ -34,5 +34,14 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Güneş Sistemi 3D",
+      "short_name": "Güneş Sistemi",
+      "description": "3D Güneş Sistemi ve Gezegenler Simülatörü",
+      "url": "./solar-system.html",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    }
   ]
 }

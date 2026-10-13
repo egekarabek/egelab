@@ -1,8 +1,9 @@
-const CACHE_NAME = 'egelab-cache-v1.2';
+const CACHE_NAME = 'egelab-cache-v1.3';
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './solar-system.html',
   './manifest.json',
   './css/style.css',
   './img/ege.jpg',
@@ -14,6 +15,7 @@ const ASSETS_TO_CACHE = [
   './js/games/gravity-cannon.js',
   './js/games/science-memory.js',
   './js/games/science-quiz.js',
+  './js/games/solar-system.js',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-192.svg',

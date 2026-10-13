@@ -192,6 +192,17 @@ class EgeLabApp {
         badge: 'Bilgi Sınavı',
         scoreLabel: 'En Yüksek Skor',
         scoreVal: storage.getHighScore('scienceQuiz')
+      },
+      {
+        id: 'solarSystem',
+        title: 'Güneş Sistemi 3D Simülatörü',
+        category: 'Uzay & Astronomi',
+        desc: 'Güneş ve 8 gezegeni 3D keşfet, yörüngeleri canlandır ve gezegenlerde kilonu test et!',
+        icon: '🌌',
+        color: 'from-cyan-500 to-blue-600',
+        badge: 'Yeni Deney',
+        scoreLabel: 'Keşif Durumu',
+        scoreVal: '3D İnteraktif'
       }
     ];
 
@@ -238,6 +249,9 @@ class EgeLabApp {
         break;
       case 'scienceQuiz':
         this.activeGame = new ScienceQuizGame(container);
+        break;
+      case 'solarSystem':
+        this.activeGame = new SolarSystemGame(container);
         break;
       default:
         this.showHome();

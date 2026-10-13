@@ -44,6 +44,15 @@
    - Müfredata uygun periyodik tablo, kimya, biyoloji ve fizik soruları.
    - %50 Eleme ve Ekstra Süre jokerleri.
 
+6. **🌌 Güneş Sistemi 3D Simülatörü (Uzay & Astronomi Lab):**
+   - Güneş ve 8 ana gezegen (Merkür, Venüs, Dünya + Ay, Mars, Jüpiter, Satürn + Halkalar, Uranüs, Neptün) ve Plüton.
+   - Kepler yörünge mekaniği, orantılı hızlar ve dönüş yönleri (Venüs ve Uranüs retrograd hareketleri).
+   - Asteroit Kuşağı, Kuiper Kuşağı ve Halley Kuyruklu Yıldızı parçacık efektleri.
+   - 3D Serbest Kamera (Döndür, Yakınlaştır, Odaklan ve Takip Et).
+   - "Bu Gezegende Ağırlığım Ne Kadar?" interaktif kütle-ağırlık laboratuvarı.
+   - Yan yana Gezegen Karşılaştırma aracı ve Astronomi Bilgi Testi.
+   - Hem tam ekran bağımsız kokpit (`solar-system.html`) hem de Ege Lab içi modül (`js/games/solar-system.js`).
+
 ---
 
 ## 💻 Nasıl Çalıştırılır?
@@ -58,7 +67,8 @@ PowerShell'de şu komutu çalıştırmanız yeterlidir:
 Tarayıcınız otomatik olarak `http://localhost:8080` adresinde açılacaktır.
 
 ### 2. Doğrudan Tarayıcıda Açarak:
-`index.html` dosyasına çift tıklayarak herhangi bir tarayıcıda doğrudan oynayabilirsiniz.
+- `index.html` dosyasına çift tıklayarak Ege Lab platformunu açabilirsiniz.
+- `solar-system.html` dosyasına çift tıklayarak doğrudan tam ekran Güneş Sistemi simülasyonunu başlatabilirsiniz.
 
 ---
 
@@ -67,8 +77,9 @@ Tarayıcınız otomatik olarak `http://localhost:8080` adresinde açılacaktır.
 ```
 d:\Projeler\egelab\
 ├── index.html                 # Ana sayfa ve oyun alanı
-├── manifest.json              # PWA manifest dosyası
-├── sw.js                      # Çevrimdışı önbellekleme (Service Worker)
+├── solar-system.html          # Tam ekran 3D Güneş Sistemi Simülatörü
+├── manifest.json              # PWA manifest dosyası & kısayolları
+├── sw.js                      # Çevrimdışı önbellekleme (Service Worker v1.3)
 ├── start-server.ps1           # Tek tıkla yerel sunucu başlatıcı
 ├── README.md                  # Proje dokümantasyonu
 ├── css/
@@ -82,7 +93,8 @@ d:\Projeler\egelab\
 │       ├── robot-code.js      # Robotik Kodlama Lab
 │       ├── gravity-cannon.js  # Fizik Yerçekimi Topu
 │       ├── science-memory.js  # Fen Hafıza Kartları
-│       └── science-quiz.js    # Element & Bilim Trivia
+│       ├── science-quiz.js    # Element & Bilim Trivia
+│       └── solar-system.js    # Güneş Sistemi 3D Laboratuvarı
 └── icons/
     ├── icon-192.png           # 192x192 PWA ikonu
     ├── icon-512.png           # 512x512 PWA ikonu
