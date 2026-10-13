@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Ege Lab - Ortaokul Bilim & Oyun İstasyonu</title>
+  
+  <!-- PWA ve SEO Meta Etiketleri -->
+  <meta name="description" content="Ege Karabek tarafından ortaokul öğrencileri için hazırlanmış eğitici bilim, zeka, kodlama ve matematik oyunları platformu.">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ege Lab">
+
+  <!-- Manifest ve İkonlar -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <!-- Ana Stil Dosyası -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================
+       ÜST BAŞLIK (HEADER)
+       ======================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-logo" onclick="app.showHome()">
+        <img src="icons/icon-192.svg" alt="Ege Lab Logo" class="brand-icon" />
+        <div class="brand-text">
+          <h1>Ege Lab</h1>
+          <span class="brand-tagline">Bilim & Oyun İstasyonu</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- PWA Kurulum Butonu -->
+        <button id="btn-pwa-install" class="nav-btn pwa-btn" style="display: none;">
+          📲 <span class="nav-text">Uygulamayı Yükle</span>
+        </button>
+
+        <!-- Ses Aç/Kapa Butonu -->
+        <button id="btn-sound-toggle" class="nav-btn" title="Sesi Aç/Kapat">
+          🔊 <span class="nav-text">Ses Açık</span>
+        </button>
+
+        <!-- Profil ve Seviye Rozeti -->
+        <div id="user-profile-chip" class="profile-chip" title="Profilini ve Rozetlerini Gör">
+          <span id="profile-avatar" class="profile-avatar-mini">🚀</span>
+          <div class="profile-info-mini">
+            <span id="profile-name" class="profile-name-text">Genç Kaşif</span>
+            <span id="profile-level-badge" class="profile-level-badge"><span id="profile-grade">6. Sınıf</span> &bull; <span id="profile-title">Meraklı Çırak</span></span>
+          </div>
+        </div>
+
+        <!-- Ege Karabek Kurucu Rozeti (Sağ Üst Köşe) -->
+        <div id="creator-header-chip" class="creator-header-chip" onclick="app.showCreatorGreeting()" title="Ege Karabek - Sayfa Sahibi & Kurucu">
+          <div class="creator-avatar-wrap">
+            <img src="img/ege.jpg" alt="Ege Karabek" class="creator-avatar-photo" />
+            <span class="creator-status-online" title="Aktif"></span>
+          </div>
+          <div class="creator-text-details">
+            <span class="creator-badge-name">Ege Karabek</span>
+            <span class="creator-badge-role">👑 Kurucu</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       ANA İÇERİK BÖLÜMÜ
+       ======================================================== -->
+  <main class="main-content">
+    
+    <!-- ANA SAYFA (HOME SECTION) -->
+    <section id="home-section">
+      
+      <!-- Kahraman Bilim Kartı -->
+      <div class="hero-banner animate-pop">
+        <div class="hero-content">
+          <span class="hero-tag">🔬 Ege Karabek'in Laboratuvarı</span>
+          <h2 class="hero-title">Ege Lab'a Hoş Geldin! <span>Keşfet & Kazan</span></h2>
+          <p class="hero-desc">
+            Bu platform <strong>Ege Karabek</strong> tarafından ortaokul öğrencileri için hazırlandı.
+            Matematik arenasında hızını sına, robotik kodlama ile algoritmalar tasarla, 
+            yerçekimi simülasyonunda fiziği keşfet ve bilim sınavında şampiyon ol!
+          </p>
+
+          <!-- Seviye İlerleme Çubuğu -->
+          <div class="hero-progress-box">
+            <div class="progress-header">
+              <span>Deneyim Puanı (XP)</span>
+              <strong id="profile-xp-text">0 XP (Seviye 1)</strong>
+            </div>
+            <div class="xp-bar-bg">
+              <div id="profile-xp-bar" class="xp-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ege'nin Öne Çıkan Kartı -->
+        <div class="hero-creator-showcase" onclick="app.showCreatorGreeting()">
+          <div class="showcase-glow-ring"></div>
+          <img src="img/ege.jpg" alt="Ege Karabek" class="hero-ege-photo" />
+          <div class="showcase-badge-info">
+            <span class="showcase-tag">👑 Sayfa Sahibi</span>
+            <strong class="showcase-name">Ege Karabek</strong>
+            <span class="showcase-sub">Ege Lab Baş Mucidi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Oyunlar Başlığı -->
+      <div class="section-heading-bar">
+        <h2 class="section-title">🎮 Laboratuvar Oyunları</h2>
+        <span class="stat-label">5 Aktif Deney &bull; Çevrimdışı Oynanabilir</span>
+      </div>
+
+      <!-- Oyun Kartları Izgarası -->
+      <div id="games-grid" class="games-grid">
+        <!-- app.js içinden dinamik olarak oluşturulacak -->
+      </div>
+    </section>
+
+    <!-- OYUN OYNAMA ALANI (GAME SECTION) -->
+    <section id="game-section" class="game-section">
+      <div id="game-canvas-area">
+        <!-- Seçilen oyun buraya yüklenecektir -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       PROFİL & ROZETLER MODAL
+       ======================================================== -->
+  <div id="profile-modal" class="modal-overlay" style="display: none;">
+    <!-- app.js içinden dinamik doldurulur -->
+  </div>
+
+  <!-- TOAST BİLDİRİM -->
+  <div id="toast-container" class="toast-banner"></div>
+
+  <!-- ========================================================
+       ALT BİLGİ (FOOTER)
+       ======================================================== -->
+  <footer class="site-footer">
+    <div class="footer-badges">
+      <span class="footer-badge">⚡ PWA Uyumlu</span>
+      <span class="footer-badge">📶 Çevrimdışı (Offline) Destekli</span>
+      <span class="footer-badge">🎯 5-8. Sınıf Müfredatına Uygun</span>
+    </div>
+    <p class="footer-credit">
+      <strong>Ege Lab</strong> &mdash; <strong>Ege Karabek</strong> tarafından ortaokul öğrencileri için geliştirildi. &copy; 2026
+    </p>
+  </footer>
+
+  <!-- ========================================================
+       JAVASCRIPT DOSYALARI
+       ======================================================== -->
+  <script src="js/audio.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/games/math-duel.js"></script>
+  <script src="js/games/robot-code.js"></script>
+  <script src="js/games/gravity-cannon.js"></script>
+  <script src="js/games/science-memory.js"></script>
+  <script src="js/games/science-quiz.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
