@@ -165,6 +165,7 @@ class SolarSystemGame {
     this.canvas = this.container.querySelector('#solar-canvas');
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext('2d');
+    this.userHasZoomed = false;
     this.resizeCanvas();
     window.addEventListener('resize', this.onResize);
   }
@@ -173,8 +174,21 @@ class SolarSystemGame {
     const parent = this.canvas.parentElement;
     if (!parent) return;
     const rect = parent.getBoundingClientRect();
-    this.canvas.width = Math.min(rect.width, 1000);
-    this.canvas.height = Math.max(480, Math.min(rect.width * 0.62, 580));
+    const w = Math.min(rect.width, 1000);
+    const isMobile = w < 600;
+    const h = isMobile ? Math.max(280, Math.min(w * 0.85, 380)) : Math.max(420, Math.min(w * 0.58, 540));
+    this.canvas.width = w;
+    this.canvas.height = h;
+    this.fov = isMobile ? Math.min(w * 0.95, 380) : Math.min(w * 0.65, 580);
+
+    if (!this.userHasZoomed) {
+      const defaultDist = isMobile ? 1050 : 680;
+      const defaultPitch = isMobile ? 0.65 : 0.52;
+      this.targetCamDist = defaultDist;
+      this.targetCamPitch = defaultPitch;
+      this.camDistance = defaultDist;
+      this.camPitch = defaultPitch;
+    }
   }
 
   generateCosmicElements() {
@@ -204,7 +218,7 @@ class SolarSystemGame {
   }
 
   setupListeners() {
-    // Sürükleme ile Kamera Döndürme
+    // Sürükleme ile Kamera Döndürme (Fare)
     this.canvas.addEventListener('mousedown', (e) => {
       this.isDragging = true;
       this.dragStartX = e.clientX;
@@ -229,10 +243,52 @@ class SolarSystemGame {
       this.isDragging = false;
     });
 
+    // Dokunmatik Jestler (Mobil Ekranlar)
+    let initialPinchDist = null;
+    this.canvas.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        this.isDragging = true;
+        this.dragStartX = e.touches[0].clientX;
+        this.dragStartY = e.touches[0].clientY;
+      } else if (e.touches.length === 2) {
+        this.userHasZoomed = true;
+        initialPinchDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+      }
+    }, { passive: true });
+
+    this.canvas.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1 && this.isDragging) {
+        const dx = e.touches[0].clientX - this.dragStartX;
+        const dy = e.touches[0].clientY - this.dragStartY;
+        this.dragStartX = e.touches[0].clientX;
+        this.dragStartY = e.touches[0].clientY;
+        this.targetCamYaw -= dx * 0.006;
+        this.targetCamPitch = Math.max(-1.4, Math.min(1.4, this.targetCamPitch + dy * 0.006));
+      } else if (e.touches.length === 2 && initialPinchDist) {
+        this.userHasZoomed = true;
+        const currentDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        const delta = (initialPinchDist - currentDist) * 2;
+        initialPinchDist = currentDist;
+        this.targetCamDist = Math.max(90, Math.min(2200, this.targetCamDist + delta));
+      }
+    }, { passive: true });
+
+    this.canvas.addEventListener('touchend', () => {
+      this.isDragging = false;
+      initialPinchDist = null;
+    });
+
     // Tekerlek ile Yakınlaştırma
     this.canvas.addEventListener('wheel', (e) => {
       e.preventDefault();
-      this.targetCamDist = Math.max(120, Math.min(1600, this.targetCamDist + e.deltaY * 0.8));
+      this.userHasZoomed = true;
+      this.targetCamDist = Math.max(90, Math.min(2200, this.targetCamDist + e.deltaY * 0.8));
     }, { passive: false });
 
     // Tıklayarak Gezegen Seçme
@@ -284,11 +340,13 @@ class SolarSystemGame {
   }
 
   findPlanetAtScreen(sx, sy) {
+    const isMobile = this.canvas.width < 600;
     for (let i = this.planets.length - 1; i >= 0; i--) {
       const p = this.planets[i];
       const state = this.planetStates[p.id];
       const dist = Math.hypot(sx - state.screenX, sy - state.screenY);
-      if (dist <= Math.max(state.screenRadius + 8, 16)) {
+      const clickRadius = Math.max(state.screenRadius + (isMobile ? 14 : 7), isMobile ? 26 : 16);
+      if (dist <= clickRadius) {
         return p.id;
       }
     }
@@ -313,9 +371,11 @@ class SolarSystemGame {
 
   resetCamera() {
     this.selectedPlanetId = null;
+    this.userHasZoomed = false;
     this.targetLookAt = { x: 0, y: 0, z: 0 };
-    this.targetCamDist = 680;
-    this.targetCamPitch = 0.52;
+    const isMobile = this.canvas.width < 600;
+    this.targetCamDist = isMobile ? 1050 : 680;
+    this.targetCamPitch = isMobile ? 0.65 : 0.52;
     this.targetCamYaw = 0.45;
     this.container.querySelectorAll('.solar-dock-pill').forEach(b => b.classList.remove('active'));
   }
@@ -373,7 +433,7 @@ class SolarSystemGame {
 
     if (z2 <= 20) return { visible: false, screenX: 0, screenY: 0, scale: 0, depth: z2 };
 
-    const fov = 580;
+    const fov = this.fov || (this.canvas.width < 600 ? 360 : 580);
     const scale = fov / z2;
     const screenX = this.canvas.width / 2 + x1 * scale;
     const screenY = this.canvas.height / 2 - y2 * scale;
@@ -497,7 +557,7 @@ class SolarSystemGame {
       const proj = this.project3D(state.x, state.y, state.z);
       state.screenX = proj.screenX;
       state.screenY = proj.screenY;
-      state.screenRadius = Math.max(3.5, p.radiusVis * proj.scale);
+      state.screenRadius = Math.max(this.canvas.width < 600 ? 4.5 : 3.5, p.radiusVis * proj.scale);
       return { p, state, depth: proj.depth, visible: proj.visible };
     }).filter(item => item.visible);
 

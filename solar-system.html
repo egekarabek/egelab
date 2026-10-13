@@ -819,33 +819,139 @@
     /* Responsive Uyumluluk */
     @media (max-width: 768px) {
       .hud-top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.6rem;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        top: 0.5rem;
+        left: 0.5rem;
+        right: 0.5rem;
+        gap: 0.4rem;
       }
       .brand-hud {
-        padding: 0.4rem 0.8rem;
+        padding: 0.35rem 0.65rem;
+        gap: 0.4rem;
+      }
+      .brand-hud-logo {
+        font-size: 1.2rem;
+      }
+      .brand-hud-title {
+        font-size: 0.9rem;
+      }
+      .brand-hud-badge {
+        display: none;
+      }
+      .top-action-buttons {
+        gap: 0.25rem;
+      }
+      .hud-btn {
+        padding: 0.45rem;
+        min-width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        justify-content: center;
+        font-size: 0.95rem;
+      }
+      .hud-btn span {
+        display: none;
       }
       .time-hud-card {
-        top: 6.8rem;
-        min-width: 220px;
-        padding: 0.6rem 0.8rem;
+        top: 3.5rem;
+        left: 0.5rem;
+        min-width: 190px;
+        max-width: calc(100vw - 1rem);
+        padding: 0.45rem 0.7rem;
+        gap: 0.35rem;
+        border-radius: 12px;
+      }
+      .time-hud-card.collapsed {
+        display: none;
+      }
+      .time-label {
+        font-size: 0.65rem;
+      }
+      .time-value {
+        font-size: 0.85rem;
+      }
+      .time-btn {
+        padding: 0.25rem 0.35rem;
+        font-size: 0.68rem;
+      }
+      .speed-slider-wrap {
+        gap: 0.35rem;
+      }
+      .speed-tag {
+        font-size: 0.68rem;
+        min-width: 36px;
+      }
+      .planets-dock-wrap {
+        bottom: 0.4rem;
+        padding: 0.25rem 0.4rem;
+        max-width: 98vw;
+        gap: 0.25rem;
+        -webkit-overflow-scrolling: touch;
+      }
+      .planet-dock-item {
+        min-width: 48px;
+        padding: 0.25rem 0.45rem;
+        border-radius: 30px;
+      }
+      .dock-icon {
+        font-size: 1.05rem;
+      }
+      .dock-name {
+        font-size: 0.6rem;
       }
       .planet-info-panel {
         width: 100%;
         max-width: 100vw;
         right: 0;
+        left: 0;
         top: auto;
-        bottom: 5rem;
+        bottom: 0;
         border-radius: 20px 20px 0 0;
-        max-height: 60vh;
+        max-height: 72vh;
+        padding: 1rem;
+        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.9);
+        z-index: 50;
+      }
+      .sheet-handle {
+        width: 40px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 99px;
+        margin: 0 auto 0.5rem auto;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.4rem;
+      }
+      .stat-box {
+        padding: 0.4rem 0.55rem;
+      }
+      .stat-box-title {
+        font-size: 0.62rem;
+      }
+      .stat-box-val {
+        font-size: 0.78rem;
+      }
+      .weight-calc-box {
+        padding: 0.6rem;
+      }
+      .fun-fact-box {
+        font-size: 0.74rem;
+        padding: 0.5rem 0.65rem;
       }
       .view-toggles-card {
-        bottom: 5.5rem;
-        display: none; /* Mobilde sadeleştir */
+        display: none;
+      }
+      .space-modal-box {
+        max-width: 95vw;
+        padding: 1rem;
+        max-height: 88vh;
       }
       .compare-selectors, .compare-cards {
         grid-template-columns: 1fr;
+        gap: 0.6rem;
       }
     }
   </style>
@@ -877,23 +983,26 @@
     </div>
 
     <div class="top-action-buttons">
+      <button id="btn-toggle-time" class="hud-btn" title="Simülasyon Hızı ve Zamanı">
+        ⏱️ <span>Zaman</span>
+      </button>
       <button id="btn-sound-toggle" class="hud-btn" title="Uzay Ambiyansı Sesini Aç/Kapat">
-        🔊 <span>Ses Açık</span>
+        🔊 <span>Ses</span>
       </button>
       <button id="btn-open-compare" class="hud-btn" title="Gezegenleri Karşılaştır">
-        ⚖️ <span>Karşılaştır</span>
+        ⚖️ <span>Kıyasla</span>
       </button>
       <button id="btn-open-weight" class="hud-btn" title="Ağırlık Laboratuvarı">
-        🏋️ <span>Kilo Hesapla</span>
+        🏋️ <span>Kilo</span>
       </button>
       <button id="btn-open-quiz" class="hud-btn" title="Uzay Bilgi Testi">
-        🎯 <span>Bilgi Testi</span>
+        🎯 <span>Test</span>
       </button>
       <button id="btn-reset-cam" class="hud-btn" title="Genel Bakışa Dön">
         🔄 <span>Sıfırla</span>
       </button>
       <a href="index.html" class="hud-btn" style="text-decoration: none;">
-        🏠 <span>Lab'a Dön</span>
+        🏠 <span>Lab</span>
       </a>
     </div>
   </header>
@@ -901,7 +1010,7 @@
   <!-- ========================================================
        ZAMAN KONTROLÜ & TAKVİM (HUD SOL ÜST)
        ======================================================== -->
-  <div class="time-hud-card">
+  <div class="time-hud-card" id="time-hud-panel">
     <div class="time-date-display">
       <span class="time-label">Simülasyon Zamanı</span>
       <span id="display-sim-date" class="time-value">1. Yıl, 0. Gün</span>
@@ -947,9 +1056,10 @@
   </div>
 
   <!-- ========================================================
-       GEZEGEN BİLGİ KARTI (HUD SAĞ PANEL)
+       GEZEGEN BİLGİ KARTI (HUD SAĞ PANEL / MOBİLDE BOTTOM SHEET)
        ======================================================== -->
   <aside id="planet-panel" class="planet-info-panel hidden">
+    <div class="sheet-handle"></div>
     <div class="panel-header">
       <div class="planet-title-group">
         <h2 id="p-name">🌍 Dünya</h2>
@@ -1453,6 +1563,8 @@
         this.targetCamPitch = 0.55;
         this.camYaw = 0.45;   // Döndürme açısı
         this.targetCamYaw = 0.45;
+        this.fov = 700;
+        this.userHasZoomed = false;
         
         this.camTarget = { x: 0, y: 0, z: 0 };
         this.targetLookAt = { x: 0, y: 0, z: 0 };
@@ -1515,6 +1627,19 @@
         this.height = window.innerHeight;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
+
+        const isPortrait = this.height > this.width;
+        // Telefonda portre modunda sistemin tamamının sığması için duyarlı FOV ve kamera mesafesi
+        this.fov = isPortrait ? Math.min(this.width * 1.05, 420) : Math.min(this.width * 0.65, 700);
+
+        if (!this.userHasZoomed) {
+          const defaultDist = isPortrait ? 1150 : 750;
+          const defaultPitch = isPortrait ? 0.68 : 0.55;
+          this.targetCamDist = defaultDist;
+          this.targetCamPitch = defaultPitch;
+          this.camDistance = defaultDist;
+          this.camPitch = defaultPitch;
+        }
       }
 
       generateStars() {
@@ -1604,8 +1729,9 @@
         // Zoom (Mouse Wheel)
         this.canvas.addEventListener('wheel', (e) => {
           e.preventDefault();
+          this.userHasZoomed = true;
           const zoomDelta = e.deltaY * 0.8;
-          this.targetCamDist = Math.max(120, Math.min(2400, this.targetCamDist + zoomDelta));
+          this.targetCamDist = Math.max(90, Math.min(2800, this.targetCamDist + zoomDelta));
         }, { passive: false });
 
         // Tıklama ile Gezegen Seçme
@@ -1625,6 +1751,7 @@
             this.dragStartX = e.touches[0].clientX;
             this.dragStartY = e.touches[0].clientY;
           } else if (e.touches.length === 2) {
+            this.userHasZoomed = true;
             initialPinchDist = Math.hypot(
               e.touches[0].clientX - e.touches[1].clientX,
               e.touches[0].clientY - e.touches[1].clientY
@@ -1643,13 +1770,14 @@
             this.targetCamPitch += dy * 0.006;
             this.targetCamPitch = Math.max(-Math.PI / 2 + 0.08, Math.min(Math.PI / 2 - 0.08, this.targetCamPitch));
           } else if (e.touches.length === 2 && initialPinchDist) {
+            this.userHasZoomed = true;
             const currentDist = Math.hypot(
               e.touches[0].clientX - e.touches[1].clientX,
               e.touches[0].clientY - e.touches[1].clientY
             );
             const delta = (initialPinchDist - currentDist) * 2;
             initialPinchDist = currentDist;
-            this.targetCamDist = Math.max(120, Math.min(2400, this.targetCamDist + delta));
+            this.targetCamDist = Math.max(90, Math.min(2800, this.targetCamDist + delta));
           }
         });
 
@@ -1657,6 +1785,18 @@
           this.isDragging = false;
           initialPinchDist = null;
         });
+
+        // Zaman Göster/Gizle Butonu
+        const toggleTimeBtn = document.getElementById('btn-toggle-time');
+        if (toggleTimeBtn) {
+          toggleTimeBtn.addEventListener('click', () => {
+            const timePanel = document.getElementById('time-hud-panel');
+            if (timePanel) {
+              timePanel.classList.toggle('collapsed');
+              toggleTimeBtn.classList.toggle('active', !timePanel.classList.contains('collapsed'));
+            }
+          });
+        }
 
         // UI Butonları
         document.getElementById('btn-time-play').addEventListener('click', () => {
@@ -1717,7 +1857,7 @@
         const sndBtn = document.getElementById('btn-sound-toggle');
         sndBtn.addEventListener('click', () => {
           const isMuted = sound.toggleMute();
-          sndBtn.innerHTML = isMuted ? '🔇 <span>Ses Kapalı</span>' : '🔊 <span>Ses Açık</span>';
+          sndBtn.innerHTML = isMuted ? '🔇 <span>Ses</span>' : '🔊 <span>Ses</span>';
           sndBtn.classList.toggle('active', !isMuted);
         });
 
@@ -1818,11 +1958,13 @@
 
       resetCamera() {
         this.selectedPlanetId = null;
+        this.userHasZoomed = false;
         document.querySelectorAll('.planet-dock-item').forEach(el => el.classList.remove('selected'));
         document.getElementById('planet-panel').classList.add('hidden');
         this.targetLookAt = { x: 0, y: 0, z: 0 };
-        this.targetCamDist = 750;
-        this.targetCamPitch = 0.55;
+        const isPortrait = this.height > this.width;
+        this.targetCamDist = isPortrait ? 1150 : 750;
+        this.targetCamPitch = isPortrait ? 0.68 : 0.55;
         this.targetCamYaw = 0.45;
       }
 
@@ -1862,11 +2004,12 @@
       }
 
       findPlanetAtScreen(sx, sy) {
+        const isMobile = this.width < 768;
         for (let i = PLANET_DATA.length - 1; i >= 0; i--) {
           const p = PLANET_DATA[i];
           const state = this.planetStates[p.id];
           const dist = Math.hypot(sx - state.screenX, sy - state.screenY);
-          const clickRadius = Math.max(state.screenRadius + 6, 18);
+          const clickRadius = Math.max(state.screenRadius + (isMobile ? 16 : 7), isMobile ? 28 : 18);
           if (dist <= clickRadius) {
             return p.id;
           }
@@ -1897,7 +2040,7 @@
           return { visible: false, screenX: 0, screenY: 0, scale: 0, depth: z2 };
         }
 
-        const fov = 700;
+        const fov = this.fov || (this.height > this.width ? 420 : 700);
         const scale = fov / z2;
         const screenX = this.width / 2 + x1 * scale;
         const screenY = this.height / 2 - y2 * scale;
@@ -2150,7 +2293,7 @@
           state.screenY = proj.screenY;
 
           const baseRadius = this.realisticScale ? (p.id === 'sun' ? 24 : Math.max(3, p.radiusReal / 2200)) : p.radiusVis;
-          state.screenRadius = Math.max(3.5, baseRadius * proj.scale);
+          state.screenRadius = Math.max(this.width < 768 ? 4.5 : 3.5, baseRadius * proj.scale);
 
           return {
             planet: p,
