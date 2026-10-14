@@ -1,4 +1,4 @@
-const CACHE_NAME = 'egelab-cache-v1.4';
+const CACHE_NAME = 'egelab-cache-v1.5';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -17,6 +17,7 @@ const ASSETS_TO_CACHE = [
   './js/games/science-quiz.js',
   './js/games/solar-system.js',
   './js/games/word-master.js',
+  './js/games/calculator.js',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-192.svg',

@@ -214,6 +214,17 @@ class EgeLabApp {
         badge: '15 Kart',
         scoreLabel: 'En Yüksek Skor',
         scoreVal: storage.getHighScore('wordMaster')
+      },
+      {
+        id: 'calculator',
+        title: 'Bilimsel Hesap Makinesi',
+        category: 'Matematik & Fen Lab',
+        desc: 'Standart & bilimsel hesaplama, LGS EBOB-EKOK, asal çarpanlar ve fen birim dönüştürücüsü!',
+        icon: '🧮',
+        color: 'from-amber-500 to-yellow-600',
+        badge: 'Laboratuvar Aracı',
+        scoreLabel: 'Kullanım Sayısı',
+        scoreVal: `${storage.getHighScore('calculator') || 0} İşlem`
       }
     ];
 
@@ -266,6 +277,9 @@ class EgeLabApp {
         break;
       case 'wordMaster':
         this.activeGame = new EnglishWordMasterGame(container);
+        break;
+      case 'calculator':
+        this.activeGame = new ScienceCalculatorGame(container);
         break;
       default:
         this.showHome();

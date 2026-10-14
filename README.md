@@ -59,6 +59,13 @@
    - Bağlam içinde örnek İngilizce cümle ipuçları ve %50 eleme jokeri.
    - Kombo çarpanı, seviye XP'si ve oyun sonu 15 kelimelik özet inceleme kartları.
 
+8. **🧮 Bilimsel Hesap Makinesi & Matematik Laboratuvarı:**
+   - **Standart & Bilimsel Mod:** Trigonometri ($\sin, \cos, \tan$ - DEG/RAD destekli), üslü sayılar ($x^2, x^3, x^y$), kökler ($\sqrt{x}, \sqrt[3]{x}$), mutlak değer, logaritma ($\log, \ln$), faktöriyel ($n!$), $\pi$ ve $e$ sabitleri, bellek (MC, MR, M+, M-).
+   - **Tam Klavye Desteği:** Sayılar, temel işlemler, Enter/Eşittir, Backspace ve Esc kısayolları.
+   - **LGS & Ortaokul Matematik Lab:** Adım adım bölme merdiveni tablosuyla EBOB & EKOK hesaplayıcı, asallık testi ve üslü asal çarpan analizi.
+   - **Fen Bilimleri Birim Dönüştürücüsü:** Uzunluk, kütle, sıcaklık, hacim ve hız birimlerini formülleriyle dönüştürme.
+   - **Hesap Geçmişi:** Yapılan işlemleri otomatik saklama, kopyalama ve geri yükleme.
+
 ---
 
 ## 💻 Nasıl Çalıştırılır?
@@ -85,7 +92,7 @@ d:\Projeler\egelab\
 ├── index.html                 # Ana sayfa ve oyun alanı
 ├── solar-system.html          # Tam ekran 3D Güneş Sistemi Simülatörü
 ├── manifest.json              # PWA manifest dosyası & kısayolları
-├── sw.js                      # Çevrimdışı önbellekleme (Service Worker v1.4)
+├── sw.js                      # Çevrimdışı önbellekleme (Service Worker v1.5)
 ├── start-server.ps1           # Tek tıkla yerel sunucu başlatıcı
 ├── README.md                  # Proje dokümantasyonu
 ├── css/
@@ -101,7 +108,8 @@ d:\Projeler\egelab\
 │       ├── science-memory.js  # Fen Hafıza Kartları
 │       ├── science-quiz.js    # Element & Bilim Trivia
 │       ├── solar-system.js    # Güneş Sistemi 3D Laboratuvarı
-│       └── word-master.js     # İngilizce Kelime Laboratuvarı (15 Kart)
+│       ├── word-master.js     # İngilizce Kelime Laboratuvarı (15 Kart)
+│       └── calculator.js      # Bilimsel Hesap Makinesi & LGS Lab
 └── icons/
     ├── icon-192.png           # 192x192 PWA ikonu
     ├── icon-512.png           # 512x512 PWA ikonu

@@ -28,7 +28,9 @@ class StorageManager {
         robotCode: 1,
         gravityCannon: 0,
         scienceMemory: 0,
-        scienceQuiz: 0
+        scienceQuiz: 0,
+        wordMaster: 0,
+        calculator: 0
       },
       badges: []
     };
@@ -122,7 +124,8 @@ class StorageManager {
       { id: 'quiz_genius', title: 'Bilim Dehası', desc: 'Bilim Sınavında 5 soruyu doğru yanıtla', icon: '🏆' },
       { id: 'solar_explorer', title: 'Güneş Sistemi Kaşifi', desc: 'Güneş Sistemi 3D Laboratuvarında gezegenleri keşfet', icon: '🌌' },
       { id: 'cosmic_master', title: 'Kozmik Bilgin', desc: 'Güneş Sistemi Bilgi Testini başarıyla tamamla', icon: '🪐' },
-      { id: 'word_wizard', title: 'Kelime Büyücüsü', desc: 'İngilizce Kelime Lab\'ında 15 kartlık görevi başarıyla tamamla', icon: '🇬🇧' }
+      { id: 'word_wizard', title: 'Kelime Büyücüsü', desc: 'İngilizce Kelime Lab\'ında 15 kartlık görevi başarıyla tamamla', icon: '🇬🇧' },
+      { id: 'calc_master', title: 'Hesap Dehası', desc: 'Laboratuvar hesap makinesi ve matematik araçlarında 10 işlem veya bilimsel dönüşüm yap', icon: '🧮' }
     ];
 
     return badgeDefinitions.map(b => ({
